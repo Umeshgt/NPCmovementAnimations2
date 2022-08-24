@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d")
 const CANVAS_WIDTH = canvas.width = 500
 const CANVAS_HEIGHT = canvas.height = 1000
 let gameFrame = 0
-const numberOfEnemies = 100
+const numberOfEnemies = 51
 const enemyArray = []
 
 
@@ -12,17 +12,26 @@ class Enemy{
     constructor(){
         this.image = new Image()
         this.image.src = "enemy2.png"
-        this.spriteWidth = 280
-        this.spriteHeight = 155
+        this.spriteWidth = 266
+        this.spriteHeight = 188
+       
         this.width = this.spriteWidth / 2.5
         this.height = this.spriteHeight / 2.5
-        this.x = Math.random() * (CANVAS_WIDTH - this.spriteWidth)
-        this.y = Math.random() * (CANVAS_HEIGHT - this.spriteHeight)
-        this.flapSpeed = Math.floor(Math.random() * 3 + 1)
+        this.x = Math.random() * (CANVAS_WIDTH - this.width)
+        this.y = Math.random() * (CANVAS_HEIGHT - this.height)
+        this.speed = Math.random() * 3 + 1
+        this.flapSpeed = Math.floor(this.speed)
         this.frame = 0
-        
+        this.speed = Math.random() * 3 + 1
     }
     update(){
+        this.x -= this.speed
+        //this.y = Math.random() * CANVAS_HEIGHT
+       // console.log(this.y)
+        if(this.x + this.spriteWidth < 0){ 
+            this.x = CANVAS_WIDTH
+            this.y = Math.random() * (CANVAS_HEIGHT - this.height)
+        }
         if(gameFrame % this.flapSpeed === 0){
             this.frame > 4 ? this.frame = 0 : this.frame++
         }
