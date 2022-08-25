@@ -22,12 +22,16 @@ class Enemy{
         this.speed = Math.random() * 3 + 1
         this.flapSpeed = Math.floor(this.speed)
         this.frame = 0
-        this.speed = Math.random() * 3 + 1
+        this.speed = Math.random() * 4 + 1
+        this.angle = 0
+        this.curve = Math.random() * 7
+        this.angleSpeed = Math.random() * 0.2
     }
     update(){
         this.x -= this.speed
-        //this.y = Math.random() * CANVAS_HEIGHT
-       // console.log(this.y)
+        this.y += this.curve * Math.sin(this.angle)
+        this.angle += this.angleSpeed
+        
         if(this.x + this.spriteWidth < 0){ 
             this.x = CANVAS_WIDTH
             this.y = Math.random() * (CANVAS_HEIGHT - this.height)
